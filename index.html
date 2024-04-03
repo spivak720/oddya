@@ -32,8 +32,8 @@ function calculateNumerology(date) {
 }
 
 function fillTableWithNumerologyNumbers() {
-    const startDate = new Date('2024-04-04');
-    const endDate = new Date('2024-12-31');
+    const startDate = new Date('04-04-2024');
+    const endDate = new Date('12-31-2024');
     const table = document.getElementById('numerologyTable');
 
     for(let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
