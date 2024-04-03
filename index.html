@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Numerology Calculator</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Numerology Numbers for 2024</h2>
+<table id="numerologyTable">
+    <tr>
+        <th>Date</th>
+        <th>Numerology Number</th>
+    </tr>
+</table>
+
+<script>
+function calculateNumerology(date) {
+    let sum = date.getFullYear().toString().split('').reduce((acc, val) => acc + parseInt(val), 0);
+    sum += date.getDate() + date.getMonth() + 1; // Adding 1 to month as getMonth() returns 0-11
+    while (sum > 9) {
+        sum = sum.toString().split('').reduce((acc, val) => acc + parseInt(val), 0);
+    }
+    return sum;
+}
+
+function fillTableWithNumerologyNumbers() {
+    const startDate = new Date('2024-01-01');
+    const endDate = new Date('2024-12-31');
+    const table = document.getElementById('numerologyTable');
+
+    for(let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+        const numerologyNumber = calculateNumerology(new Date(date));
+        const row = table.insertRow(-1);
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        cell1.innerHTML = date.toISOString().split('T')[0]; // Formats the date as YYYY-MM-DD
+        cell2.innerHTML = numerologyNumber;
+    }
+}
+
+window.onload = fillTableWithNumerologyNumbers;
+</script>
+
+</body>
+</html>
