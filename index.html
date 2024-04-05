@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel='stylesheet' id='us-fonts-css' href='https://fonts.googleapis.com/css?family=Open+Sans%3A400%2C700%7CPoppins%3A600&#038;display=swap&#038;ver=6.5' media='all' />
+    <link rel='stylesheet' id='us-style-css' href='https://capitalton.com/wp-content/themes/Impreza/css/style.min.css?ver=8.22' media='all' />
+    <link rel='stylesheet' id='theme-style-css' href='https://capitalton.com/wp-content/themes/Impreza-child/style.css?ver=8.22' media='all' />
     <style>
         table, th, td {
             border: 1px solid black;
@@ -9,19 +12,38 @@
             text-align: left;
         }
     </style>
-    <link rel="stylesheet" href="https://localfishingguides.com/site_assets/css/bootstrap.css">
-    <link rel="stylesheet" href="https://localfishingguides.com/site_assets/css/font-awesome.css">
-    <link rel="stylesheet" href="https://localfishingguides.com/site_assets/css/styles.css">
 </head>
 <body>
-
-<h2>Numerology Numbers for 2024</h2>
-<table id="numerologyTable">
-    <tr>
-        <th>Date</th>
-        <th>Type of Day</th>
-    </tr>
-</table>
+    <section class="l-section wpb_row height_custom">
+        <div class="g-cols vc_row via_flex valign_top type_default stacking_default">
+            <div class="vc_col-sm-4 wpb_column vc_column_container">
+                <div class="vc_column-inner">
+                    <div class="wpb_wrapper">
+                        <table id="numerologyTable">
+                            <tr>
+                                <th>Date</th>
+                                <th>Type of Day</th>
+                            </tr>
+                            <!-- The first script block will populate this table -->
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="vc_col-sm-4 wpb_column vc_column_container">
+                <div class="vc_column-inner">
+                    <div class="wpb_wrapper">
+                        <table id="personalMonthTable">
+                            <tr>
+                                <th>Month</th>
+                                <th>Personal Month</th>
+                            </tr>
+                            <!-- The second script block will populate this table -->
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 <script>
 function calculateNumerology(date) {
@@ -41,21 +63,58 @@ function formatDate(date) {
 }
 
 function fillTableWithNumerologyNumbers() {
-    const startDate = new Date('2024-04-01');
+    const startDate = new Date('2024-04-06');
     const endDate = new Date('2024-12-31');
     const table = document.getElementById('numerologyTable');
 
-    for(let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+    for(let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
         const numerologyNumber = calculateNumerology(new Date(date));
         const row = table.insertRow(-1);
         const cell1 = row.insertCell(0);
         const cell2 = row.insertCell(1);
-        cell1.innerHTML = formatDate(new Date(date)); // Now formats the date as MM-DD-YYYY
+        cell1.innerHTML = formatDate(new Date(date)); // Formats the date as MM-DD-YYYY
         cell2.innerHTML = numerologyNumber;
     }
 }
 
-window.onload = fillTableWithNumerologyNumbers;
+window.addEventListener('load', fillTableWithNumerologyNumbers);
+</script>
+
+<script>
+function reduceToSingleDigit(num) {
+    while (num >= 10) {
+        num = num.toString().split('').reduce((acc, val) => acc + parseInt(val, 10), 0);
+    }
+    return num;
+}
+
+function calculatePersonalMonth(birthDay, birthMonth, currentYear, month) {
+    const yearSum = reduceToSingleDigit(currentYear.toString().split('').reduce((acc, val) => acc + parseInt(val, 10), 0));
+    const birthDaySum = reduceToSingleDigit(birthDay);
+    const birthMonthSum = reduceToSingleDigit(birthMonth);
+    const personalYear = reduceToSingleDigit(yearSum + birthDaySum + birthMonthSum);
+    const personalMonth = reduceToSingleDigit(personalYear + month);
+    return personalMonth;
+}
+
+function populateTable() {
+    const table = document.getElementById('personalMonthTable');
+    const months = ["April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const birthDay = 1;
+    const birthMonth = 4; // April
+    const currentYear = 2024;
+
+    months.forEach((month, index) => {
+        const row = table.insertRow(-1);
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        cell1.innerHTML = month;
+        const personalMonthNum = calculatePersonalMonth(birthDay, birthMonth, currentYear, index + 4); // Month as a number, April = 4
+        cell2.innerHTML = personalMonthNum;
+    });
+}
+
+window.addEventListener('load', populateTable);
 </script>
 
 </body>
