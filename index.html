@@ -63,8 +63,8 @@ function formatDate(date) {
 }
 
 function fillTableWithNumerologyNumbers() {
-    const startDate = new Date('2024-12-11');
-    const endDate = new Date('2024-12-31');
+    const startDate = new Date('2025-02-05');
+    const endDate = new Date('2025-12-31');
     const table = document.getElementById('numerologyTable');
 
     for(let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
@@ -102,7 +102,7 @@ function populateTable() {
     const months = ["April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const birthDay = 1;
     const birthMonth = 4; // April
-    const currentYear = 2024;
+    const currentYear = 2025;
 
     months.forEach((month, index) => {
         const row = table.insertRow(-1);
